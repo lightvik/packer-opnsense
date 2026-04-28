@@ -1,6 +1,6 @@
 FROM oraclelinux:10-slim
 
-ARG PACKER_VERSION=1.11.2
+ARG PACKER_VERSION=1.15.3
 
 # xorriso нужен плагину QEMU для создания CD-ROM-образа с config.xml
 # hadolint ignore=DL3041
