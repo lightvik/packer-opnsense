@@ -25,7 +25,13 @@ Packer-шаблон для автоматической установки OPNse
 3. Запустить сборку:
 
 ```bash
-./run.sh build opnsense.pkr.hcl
+docker run \
+  --rm \
+  --device /dev/kvm \
+  --network=host \
+  --volume "$(pwd):/workspace" \
+  ghcr.io/lightvik/packer-opnsense:latest \
+  build opnsense.pkr.hcl
 ```
 
 Образ будет записан в `output/opnsense.qcow2`.
@@ -41,7 +47,6 @@ Packer-шаблон для автоматической установки OPNse
 | `opnsense.pkr.hcl` | Основной Packer-шаблон (источник QEMU + автоматизация загрузки) |
 | `plugins.pkr.hcl` | Зависимости плагинов Packer (плагин QEMU) |
 | `config.xml` | Конфигурация OPNsense, инжектируемая через CD-ROM (не коммитится) |
-| `run.sh` | Обёртка: монтирует каталог проекта и запускает Packer внутри Docker |
 | `Dockerfile` | Образ с Packer + QEMU для CI и локальных сборок |
 
 ## Docker-образ

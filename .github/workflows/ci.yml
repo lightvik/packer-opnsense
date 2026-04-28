@@ -2,6 +2,10 @@ name: CI
 
 on:
   push:
+    branches:
+      - master
+    tags:
+      - 'v*'
   pull_request:
 
 env:
@@ -18,8 +22,14 @@ jobs:
         with:
           dockerfile: Dockerfile
 
+      - name: Setup Packer
+        uses: hashicorp/setup-packer@v3
+
+      - name: Lint HCL
+        run: packer fmt -check .
+
   publish:
-    if: github.ref_type == 'tag' && startsWith(github.ref_name, 'v')
+    if: github.ref_type == 'tag'
     needs: lint
     runs-on: ubuntu-latest
     permissions:

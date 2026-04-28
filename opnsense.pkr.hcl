@@ -4,31 +4,31 @@ locals {
 }
 
 source "qemu" "opnsense" {
-  qemu_binary = "/usr/libexec/qemu-kvm" # Путь к бинарнику QEMU - задан явно т.к. внутри docker не может найти в $PATH
-  iso_url          = local.iso_url      # Путь к ISO-образу установщика
-  iso_checksum     = "none"             # Контрольная сумма ISO (none — пропустить проверку)
-  output_directory = "output"           # Директория для сохранения готового образа
-  vm_name          = "opnsense.qcow2"   # Имя выходного файла образа
-  format           = "qcow2"            # Формат выходного образа диска
-  accelerator      = "kvm"              # Аппаратное ускорение виртуализации
-  disk_size        = "30G"              # Размер виртуального диска
-  memory           = 4096               # Объём оперативной памяти в МБ
-  cpus             = 4                  # Количество виртуальных процессоров
-  disk_interface   = "virtio"           # Интерфейс диска — протокол, через который ВМ видит диск
-  net_device       = "virtio-net"       # Модель сетевого адаптера, эмулируемого QEMU
-  communicator     = "none"             # Без SSH/WinRM — управление только через boot_command
-  shutdown_timeout = "40m"              # Максимальное время ожидания выключения ВМ
-  headless            = true            # Запуск без графического окна QEMU
-  use_default_display = false           # Не использовать дисплей по умолчанию (нужно для headless)
-  vnc_port_min     = 5959               # Минимальный порт VNC для подключения к консоли
-  vnc_port_max     = 5959               # Максимальный порт VNC (фиксируем один порт)
-  vnc_bind_address = "127.0.0.1"        # Адрес привязки VNC (только локально)
+  qemu_binary         = "/usr/libexec/qemu-kvm" # Путь к бинарнику QEMU - задан явно т.к. внутри docker не может найти в $PATH
+  iso_url             = local.iso_url           # Путь к ISO-образу установщика
+  iso_checksum        = "none"                  # Контрольная сумма ISO (none — пропустить проверку)
+  output_directory    = "output"                # Директория для сохранения готового образа
+  vm_name             = "opnsense.qcow2"        # Имя выходного файла образа
+  format              = "qcow2"                 # Формат выходного образа диска
+  accelerator         = "kvm"                   # Аппаратное ускорение виртуализации
+  disk_size           = "30G"                   # Размер виртуального диска
+  memory              = 4096                    # Объём оперативной памяти в МБ
+  cpus                = 4                       # Количество виртуальных процессоров
+  disk_interface      = "virtio"                # Интерфейс диска — протокол, через который ВМ видит диск
+  net_device          = "virtio-net"            # Модель сетевого адаптера, эмулируемого QEMU
+  communicator        = "none"                  # Без SSH/WinRM — управление только через boot_command
+  shutdown_timeout    = "40m"                   # Максимальное время ожидания выключения ВМ
+  headless            = true                    # Запуск без графического окна QEMU
+  use_default_display = false                   # Не использовать дисплей по умолчанию (нужно для headless)
+  vnc_port_min        = 5959                    # Минимальный порт VNC для подключения к консоли
+  vnc_port_max        = 5959                    # Максимальный порт VNC (фиксируем один порт)
+  vnc_bind_address    = "127.0.0.1"             # Адрес привязки VNC (только локально)
 
   # Второй CD-ROM с конфигурационным файлом OPNsense
   cd_content = {
-    "conf/config.xml" = "config.xml"   # config.xml из корня проекта → conf/config.xml на ISO
+    "conf/config.xml" = "config.xml" # config.xml из корня проекта → conf/config.xml на ISO
   }
-  cd_label = "OPNSENSE_CONFIG"         # Метка тома — по ней OPNsense находит диск с конфигом
+  cd_label = "OPNSENSE_CONFIG" # Метка тома — по ней OPNsense находит диск с конфигом
 
   boot_wait = "2s"
   boot_command = [

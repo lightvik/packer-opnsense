@@ -11,7 +11,6 @@ The entire project was designed and implemented in collaboration with Claude:
 - Config injection via a second CD-ROM (`OPNSENSE_CONFIG` label)
 - Dockerfile with Packer + QEMU for reproducible builds
 - GitHub Actions CI: Dockerfile linting and GHCR image publishing
-- `run.sh` wrapper for running Packer inside Docker with KVM access
 - Documentation (`README.md`)
 
 ## About Claude
