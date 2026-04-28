@@ -1,0 +1,5 @@
+output/
+config.xml
+*.iso
+packer_cache/
+crash.log
