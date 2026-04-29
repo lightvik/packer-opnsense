@@ -1,7 +1,9 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="logo-dark.svg">
-  <img src="logo.svg" alt="packer-opnsense">
-</picture>
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="logo-dark.svg">
+    <img src="logo.svg" alt="packer-opnsense" width="660">
+  </picture>
+</div>
 
 Packer-шаблон для автоматической установки OPNsense в qcow2-образ через QEMU/KVM.
 
