@@ -14,8 +14,8 @@ Packer-шаблон для автоматической установки OPNse
 ## Быстрый старт
 
 1. Положить ISO в корень проекта (`OPNsense-*-dvd-amd64.iso`)
-2. Положить `config.xml` в корень проекта
-3. Запустить:
+2. Для UEFI — положить `config.xml` в корень проекта
+3. Запустить, передав тип прошивки первым аргументом: `bios` или `uefi`
 
 ```bash
 docker run \
@@ -24,7 +24,7 @@ docker run \
   --network=host \
   --volume "$(pwd):/workspace" \
   ghcr.io/lightvik/packer-opnsense:latest \
-  build .
+  uefi
 ```
 
 > VNC-консоль установщика доступна на `127.0.0.1:5959` во время сборки.
@@ -33,10 +33,12 @@ docker run \
 
 | Файл | Назначение |
 |---|---|
-| `opnsense.pkr.hcl` | Packer-шаблон: QEMU-источник и автоматизация установки |
+| `opnsense-bios.pkr.hcl` | Packer-шаблон для BIOS (SeaBIOS) |
+| `opnsense-uefi.pkr.hcl` | Packer-шаблон для UEFI (EDK2-OVMF) |
 | `plugins.pkr.hcl` | Зависимости плагинов Packer |
+| `entrypoint.sh` | Точка входа: создаёт config ISO (UEFI) и запускает packer |
 | `config.xml` | Конфигурация OPNsense, инжектируемая через CD-ROM (не коммитится) |
-| `Dockerfile` | Образ с Packer и QEMU |
+| `Dockerfile` | Образ с Packer, QEMU и OVMF на базе Oracle Linux 10 |
 
 ## CI
 
