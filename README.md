@@ -5,6 +5,8 @@
   </picture>
 </div>
 
+## Описание
+
 Packer-шаблон для автоматической установки OPNsense в qcow2-образ через QEMU/KVM.
 
 Загружает DVD ISO в QEMU, инжектирует `config.xml` через второй CD-ROM, проводит установку в автоматическом режиме (ZFS stripe) и сохраняет результат в `output/opnsense.qcow2`.
