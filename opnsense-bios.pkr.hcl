@@ -54,7 +54,7 @@ source "qemu" "opnsense" {
     # Подтверждаем успешный импорт конфигурации
     "<enter>",
     "<wait2s>",
-    # Install (ZFS)
+    # Главное меню: Install (ZFS)
     "<enter>",
     "<wait2>",
     # Тип ZFS-пула: stripe (по умолчанию)
@@ -68,7 +68,7 @@ source "qemu" "opnsense" {
     "<left><enter>",
     # Ждём завершения установки
     "<wait5m>",
-    # Финальный экран: выбираем Shell (второй пункт после Reboot)
+    # Финальный экран - выбираем «Complete Install»
     "<down><enter>",
     "<wait2>",
     # Отправляем OS команду выключения

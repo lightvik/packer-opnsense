@@ -53,9 +53,6 @@ source "qemu" "opnsense" {
     ["-boot", "once=d"],
   ]
 
-
-
-
   boot_wait = "60s" # Ждём полной загрузки Live CD
   boot_command = [
     # Вводим логин установщика
@@ -70,29 +67,29 @@ source "qemu" "opnsense" {
     # Главное меню: три стрелки вниз до пункта «Import config»
     "<down><down><down><enter>",
     "<wait2s>",
-    # Выбор носителя с конфигом: cd1 (второй CD-ROM)
+    # Выбор носителя с конфигом: (vtbd0 -> sr0 -> sr1)
     "<down><enter>",
     "<wait2s>",
-    # Подтверждаем импорт
+    # Подтверждаем успешный импорт конфигурации
     "<enter>",
     "<wait2s>",
-    # Install (ZFS)
+    # Главное меню: Install (ZFS)
     "<enter>",
     "<wait2>",
-    # Тип пула: stripe
+    # Тип ZFS-пула: stripe (по умолчанию)
     "<enter>",
     "<wait2>",
-    # Выбираем диск vtbd0, подтверждаем
+    # Выбор диска: отмечаем vtbd0 пробелом, затем OK
     "<spacebar>",
     "<enter>",
     "<wait2>",
-    # Подтверждение стирания диска
+    # Подтверждение о стирании диска
     "<left><enter>",
     "<wait5m>",
-    # Финальный экран: Shell
+    # Финальный экран - выбираем «Complete Install»
     "<down><enter>",
     "<wait2>",
-    # Выключение
+    # Отправляем OS команду выключения
     "<down><enter>",
   ]
 }
