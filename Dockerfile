@@ -2,6 +2,7 @@ FROM oraclelinux:10-slim
 
 ARG PACKER_VERSION=1.15.3
 
+# hadolint ignore=DL3041
 RUN microdnf install -y \
     curl \
     unzip \
