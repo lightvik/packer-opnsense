@@ -52,10 +52,10 @@ source "qemu" "opnsense" {
     ["-device", "scsi-cd,drive=cfgiso,bus=scsi0.0"],
     ["-boot", "once=d"],
   ]
-    
-    
-    
-    
+
+
+
+
   boot_wait = "60s" # Ждём полной загрузки Live CD
   boot_command = [
     # Вводим логин установщика
