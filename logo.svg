@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 90" width="440" height="90" role="img" aria-label="packer-opnsense">
+  <defs>
+    
+  </defs>
+
+  <polygon class="hex" style="fill:none;stroke:#1c1c2e;stroke-width:1.8;stroke-linejoin:round" points="45,8 82,27.5 82,62.5 45,82 8,62.5 8,27.5"></polygon>
+  <polygon style="fill:#F5821F" points="45,27 63,36.5 45,46 27,36.5"></polygon>
+  <polygon style="fill:#7A2E05" points="27,36.5 45,46 45,63 27,53.5"></polygon>
+  <polygon style="fill:#C24E10" points="63,36.5 45,46 45,63 63,53.5"></polygon>
+
+  <text class="te" x="104" y="45" style="font-family:&#39;Courier New&#39;,Courier,monospace;font-size:30px;dominant-baseline:central;fill:#1c1c2e;">
+    <tspan font-weight="700">packer</tspan><tspan fill="#F5821F" font-weight="700">-</tspan><tspan font-weight="400">opnsense</tspan>
+  </text>
+</svg>
