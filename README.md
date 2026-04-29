@@ -1,5 +1,3 @@
-# packer-opnsense
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="logo-dark.svg">
   <img src="logo.svg" alt="packer-opnsense">
