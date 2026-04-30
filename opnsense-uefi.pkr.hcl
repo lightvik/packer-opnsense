@@ -16,26 +16,26 @@ locals {
 }
 
 source "qemu" "opnsense" {
-  qemu_binary         = "/usr/libexec/qemu-kvm"
-  iso_url             = local.iso_url # нужен только Packer для валидации; в QEMU передаётся через qemuargs
-  iso_checksum        = "none"
-  output_directory    = "output"
-  vm_name             = "opnsense.qcow2"
-  format              = "qcow2"
-  accelerator         = "kvm"
-  disk_size           = "31G"
-  memory              = 4096
-  cpus                = 4
-  disk_interface      = "virtio" # используется только для qemu-img create; в QEMU диск передаётся через qemuargs
-  net_device          = "virtio-net"
-  communicator        = "none"
-  shutdown_timeout    = "40m"
-  headless            = true
-  use_default_display = false
-  vnc_port_min        = 5959
-  vnc_port_max        = 5959
-  vnc_bind_address    = "127.0.0.1"
-  machine_type        = "q35"
+  qemu_binary         = "/usr/libexec/qemu-kvm" # Путь к бинарнику QEMU - задан явно т.к. внутри docker не может найти в $PATH
+  iso_url             = local.iso_url           # нужен только Packer для валидации; в QEMU передаётся через qemuargs
+  iso_checksum        = "none"                  # Контрольная сумма ISO (none — пропустить проверку)
+  output_directory    = "output"                # Директория для сохранения готового образа
+  vm_name             = "opnsense.qcow2"        # Имя выходного файла образа
+  format              = "qcow2"                 # Формат выходного образа диска
+  accelerator         = "kvm"                   # Аппаратное ускорение виртуализации
+  disk_size           = "31G"                   # Размер виртуального диска
+  memory              = 4096                    # Объём оперативной памяти в МБ
+  cpus                = 4                       # Количество виртуальных процессоров
+  disk_interface      = "virtio"                # используется только для qemu-img create; в QEMU диск передаётся через qemuargs
+  net_device          = "virtio-net"            # Модель сетевого адаптера, эмулируемого QEMU
+  communicator        = "none"                  # Без SSH/WinRM — управление только через boot_command
+  shutdown_timeout    = "40m"                   # Максимальное время ожидания выключения ВМ
+  headless            = true                    # Запуск без графического окна QEMU
+  use_default_display = false                   # Не использовать дисплей по умолчанию (нужно для headless)
+  vnc_port_min        = 59591                   # Минимальный порт VNC для подключения к консоли
+  vnc_port_max        = 59591                   # Максимальный порт VNC (фиксируем один порт)
+  vnc_bind_address    = "127.0.0.1"             # Адрес привязки VNC (только локально)
+  machine_type        = "q35"                   # Тип чипсета: q35 — современный PCIe-чипсет, обязателен для UEFI/OVMF
 
   # При использовании qemuargs Packer заменяет все свои дефолтные аргументы QEMU на наши.
   # Поэтому диск и CD-ROM нужно передавать явно — иначе они не попадут в команду запуска QEMU.
