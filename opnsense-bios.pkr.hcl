@@ -20,9 +20,10 @@ source "qemu" "opnsense" {
   shutdown_timeout    = "40m"                   # Максимальное время ожидания выключения ВМ
   headless            = true                    # Запуск без графического окна QEMU
   use_default_display = false                   # Не использовать дисплей по умолчанию (нужно для headless)
-  vnc_port_min        = 5959                    # Минимальный порт VNC для подключения к консоли
-  vnc_port_max        = 5959                    # Максимальный порт VNC (фиксируем один порт)
+  vnc_port_min        = 59591                   # Минимальный порт VNC для подключения к консоли
+  vnc_port_max        = 59591                   # Максимальный порт VNC (фиксируем один порт)
   vnc_bind_address    = "127.0.0.1"             # Адрес привязки VNC (только локально)
+  machine_type        = "pc"                    # Тип чипсета: pc — классический i440FX, достаточен для Legacy BIOS
 
   # Второй CD-ROM с конфигурационным файлом OPNsense
   cd_content = {
