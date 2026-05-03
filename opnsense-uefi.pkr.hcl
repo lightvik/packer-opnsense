@@ -68,7 +68,7 @@ source "qemu" "opnsense" {
     "<down><down><down><enter>",
     "<wait2s>",
     # Выбор носителя с конфигом: (vtbd0 -> sr0 -> sr1)
-    "<down><enter>",
+    "<down><down><enter>",
     "<wait2s>",
     # Подтверждаем успешный импорт конфигурации
     "<enter>",
