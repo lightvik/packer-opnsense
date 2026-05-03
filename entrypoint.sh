@@ -12,6 +12,18 @@ usage() {
   exit 1
 }
 
+clean_output() {
+  local hcl="$1"
+  local output_dir
+  output_dir=$(grep -oP 'output_directory\s*=\s*"\K[^"]+' "$hcl" | head -1)
+  output_dir="${output_dir:-output}"
+
+  if [[ -d "$output_dir" ]]; then
+    step "Удаление предыдущей директории сборки: $output_dir"
+    rm -rf "$output_dir"
+  fi
+}
+
 # ── validate args ─────────────────────────────────────────────────────────────
 
 [[ $# -eq 1 ]] || usage
@@ -23,6 +35,7 @@ FIRMWARE="${1,,}"   # lowercase
 # ── bios ──────────────────────────────────────────────────────────────────────
 
 run_bios() {
+  clean_output opnsense-bios.pkr.hcl
   step "Запуск BIOS-сборки"
   exec packer build opnsense-bios.pkr.hcl
 }
@@ -51,6 +64,7 @@ build_config_iso() {
 
 run_uefi() {
   build_config_iso
+  clean_output opnsense-uefi.pkr.hcl
   step "Запуск UEFI-сборки"
   exec packer build opnsense-uefi.pkr.hcl
 }

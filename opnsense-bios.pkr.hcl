@@ -36,7 +36,7 @@ source "qemu" "opnsense" {
     # Пропускаем таймаут загрузочного меню
     "<enter>",
     # Ждём полной загрузки Live CD
-    "<wait60>",
+    "<wait90>",
     # Вводим логин установщика
     "installer<enter>",
     "<wait1s>",

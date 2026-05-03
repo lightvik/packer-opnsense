@@ -53,7 +53,7 @@ source "qemu" "opnsense" {
     ["-boot", "once=d"],
   ]
 
-  boot_wait = "60s" # Ждём полной загрузки Live CD
+  boot_wait = "90s" # Ждём полной загрузки Live CD
   boot_command = [
     # Вводим логин установщика
     "installer<enter>",
