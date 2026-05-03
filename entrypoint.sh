@@ -24,6 +24,19 @@ clean_output() {
   fi
 }
 
+run_packer() {
+  local hcl="$1"
+  packer build "$hcl" &
+  local pid=$!
+  # При Ctrl+C packer ждёт graceful shutdown QEMU (до shutdown_timeout).
+  # Убиваем packer и все его дочерние процессы (QEMU) принудительно.
+  trap 'pkill -KILL -P $pid 2>/dev/null; kill -KILL $pid 2>/dev/null; exit 130' INT TERM
+  wait "$pid"
+  local rc=$?
+  trap - INT TERM
+  return $rc
+}
+
 # ── validate args ─────────────────────────────────────────────────────────────
 
 [[ $# -eq 1 ]] || usage
@@ -37,7 +50,7 @@ FIRMWARE="${1,,}"   # lowercase
 run_bios() {
   clean_output opnsense-bios.pkr.hcl
   step "Запуск BIOS-сборки"
-  exec packer build opnsense-bios.pkr.hcl
+  run_packer opnsense-bios.pkr.hcl
 }
 
 # ── uefi ──────────────────────────────────────────────────────────────────────
@@ -66,7 +79,7 @@ run_uefi() {
   build_config_iso
   clean_output opnsense-uefi.pkr.hcl
   step "Запуск UEFI-сборки"
-  exec packer build opnsense-uefi.pkr.hcl
+  run_packer opnsense-uefi.pkr.hcl
 }
 
 # ── main ──────────────────────────────────────────────────────────────────────
